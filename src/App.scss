@@ -1,0 +1,110 @@
+body {
+  margin: 0 auto;
+  padding: 0;
+  background-color: #282c34;
+  min-height: 100vh;
+}
+
+// Font
+@font-face {
+  font-family: 'Roboto';
+  src: url('assets/Roboto/Roboto-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto-Bold';
+  src: url('assets/Roboto/Roboto-Bold.ttf') format('truetype');
+}
+
+// Variables
+$bg-secondary: #1f242f;
+
+// UTILITY CLASSES
+.text-link {
+  color: #61dafb;
+}
+
+.bg-primary {
+  background-color: #4b637e !important;
+}
+
+.form-control {
+  font-size: 12px;
+}
+
+// APP STYLES
+.App {
+  width: 100%;
+  height: auto;
+  padding-top: 5rem;
+  overflow-x: hidden;
+
+  .main-header {
+    width: 100%;
+    height: 5rem;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    background-color: $bg-secondary;
+    box-shadow: 0 2px 2px 0 rgba(10,10,10,.14),0 3px 1px -2px rgba(10,10,10,.12),0 1px 5px 0 rgba(10,10,10,.2);
+    font-family: Roboto;
+
+    .brand img {
+      width: 100px;
+      height: 50px;
+    }
+
+    .menu {
+      a {
+        font-weight: 600!important;
+      }
+
+      .btn {
+        box-shadow: 0 2px 2px 0 rgba(10,10,10,.14), 0 3px 1px -2px rgba(10,10,10,.12), 0 1px 5px 0 rgba(10,10,10,.2);
+        border-radius: 20px!important;
+        background-color: #1f242f;
+        border-color: #1f242f;
+      }
+    }
+  }
+
+  .hero {
+    .search {
+      h2 {
+        font-size: 4rem;
+        font-family: Roboto-bold;
+      }
+
+      .btn {
+        height: 2.5rem;
+      }
+  
+      #search-input {
+        width: 100%;
+        height: 100%;
+        height: 2.5rem;
+      }
+    }
+
+    .product img {
+      width: 40rem;
+    }
+  }
+
+  .filter {
+    min-height: 50rem;
+    background-color: $bg-secondary;
+    box-shadow: 0 2px 2px 0 rgba(10,10,10,.14), 0 3px 1px -2px rgba(10,10,10,.12), 0 1px 5px 0 rgba(10,10,10,.2);
+    position: sticky;
+    top: 50px;
+
+    .heading {
+      color: white;
+    }
+
+    label {
+      color: #ffffff;
+      font-size: 14px;
+    }
+  }
+}
