@@ -71,7 +71,7 @@ $bg-secondary: #1f242f;
   .hero {
     .search {
       h2 {
-        font-size: 4rem;
+        font-size: 52px;
         font-family: Roboto-bold;
       }
 
@@ -86,8 +86,9 @@ $bg-secondary: #1f242f;
       }
     }
 
-    .product img {
-      width: 40rem;
+    .hero-img img {
+      width: 100%;
+      height: auto;
     }
   }
 
@@ -98,6 +99,10 @@ $bg-secondary: #1f242f;
     position: sticky;
     top: 50px;
 
+    .btn {
+      font-size: 12px;
+    }
+
     .heading {
       color: white;
     }
@@ -105,6 +110,49 @@ $bg-secondary: #1f242f;
     label {
       color: #ffffff;
       font-size: 14px;
+    }
+  }
+
+  .products {
+    .paging-btns {
+      .btn {
+        background: transparent;
+        color: white;
+        border-radius: 50px;
+        font-size: 0.875rem;
+
+        &.active {
+          background-color: rgba(63,81,181,.3)!important;
+          border: 1px solid hsla(0,0%,100%,.3)!important;
+        }
+      }
+    }
+  }
+
+  .product {
+    background-color: $bg-secondary;
+
+    .badge {
+      background: transparent;
+      border: 1px solid rgba(222, 222, 222, 0.6);
+      color: rgb(222, 222, 222);
+    }
+
+    img {
+      height: 125px;
+    }
+
+    .name {
+      font-size: 14px;
+    }
+
+    .capacity {
+      font-size: 0.85rem;
+    }
+
+    .price h4 {
+      font-size: 18px;
+      font-weight: bold;
     }
   }
 }
