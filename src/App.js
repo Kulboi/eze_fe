@@ -8,7 +8,7 @@ import Filter from './components/Filter';
 import Products from './components/Products';
 
 const App = ()=> {
-  const [productType, setProductType] = useState('');
+  const [productType, setProductType] = useState('BuyRequest');
   const [currPage, setCurrPage] = useState(1);
   const [products, setProducts] = useState([]);
   const [totalProducts, setTotalProducts] = useState(null);

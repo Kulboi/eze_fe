@@ -6,13 +6,8 @@ const Filter = (props)=> {
   const minPriceEl = useRef(null);
   const maxPriceEl = useRef(null);
 
-  useEffect(()=> {
-    props.setProductType('buy');
-  })
-
   const toggleRequestType = (type)=> {
     props.setProductType(type);
-    console.log(props.productType)
     props.setCurrPage(1);
     props.fetchProducts();
   }
@@ -56,15 +51,15 @@ const Filter = (props)=> {
           <div className="btn-group" role="group" aria-label="Basic example">
             <button 
               type="button" 
-              className={`btn btn-sm ${requestType === 'buy' ? 'btn-primary' : 'btn-light'}`}
-              onClick={e => toggleRequestType('buy')}>
+              className={`btn btn-sm ${requestType === 'BuyRequest' ? 'btn-primary' : 'btn-light'}`}
+              onClick={e => toggleRequestType('BuyRequest')}>
                 Buy Request
             </button>
 
             <button 
               type="button" 
-              className={`btn btn-sm ${requestType === 'buy' ? 'btn-light' : 'btn-primary'}`}
-              onClick={e => toggleRequestType('sell')}>
+              className={`btn btn-sm ${requestType === 'SellRequest' ? 'btn-primary' : 'btn-light'}`}
+              onClick={e => toggleRequestType('SellRequest')}>
               Sell Request
             </button>
           </div>
