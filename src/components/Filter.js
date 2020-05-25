@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 
 const Filter = (props)=> {
   const requestType = props.productType;
+  const uploadRef = useRef(null);
   const minPriceEl = useRef(null);
   const maxPriceEl = useRef(null);
 
@@ -26,8 +27,24 @@ const Filter = (props)=> {
     props.sortByPrice(minPrice, maxPrice);
   }
 
-  const uploadProductsData = ()=> {
+  const clickUpload = ()=> {
+    uploadRef.current.click();
+  }
 
+  const uploadProductsData = async (e)=> {
+    let formData = new FormData();
+    formData.append('file', e.target.files[0]);
+
+    const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}upload`, {
+      method: 'POST',
+      body: formData
+    });
+    
+    const response = await res.json(); 
+    
+    if(response.status === "success") {
+      alert('Upload was successful');
+    }
   }
 
   return (
@@ -220,7 +237,13 @@ const Filter = (props)=> {
         <div className="d-flex justify-content-between">
           <button type="button" className="btn btn-sm btn-primary">RESET</button>
 
-          <button type="button" className="btn btn-sm btn-primary">LOAD IPHONES</button>
+          <input 
+            type="file" 
+            style={ {display: 'none'} }
+            ref={uploadRef}
+            accept=".xlsx, .csv"
+            onChange={e => uploadProductsData(e)} />
+          <button type="button" className="btn btn-sm btn-primary" onClick={e => clickUpload()}>LOAD IPHONES</button>
         </div>
       </div>
     </div>

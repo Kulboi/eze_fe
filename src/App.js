@@ -8,14 +8,13 @@ import Filter from './components/Filter';
 import Products from './components/Products';
 
 const App = ()=> {
-  const apiBaseUrl = 'https://eze-be.herokuapp.com/';
   const [productType, setProductType] = useState('');
   const [currPage, setCurrPage] = useState(1);
   const [products, setProducts] = useState([]);
   const [totalProducts, setTotalProducts] = useState(null);
 
   const fetchProducts = async ()=> {
-    const response = await fetch(`${apiBaseUrl}products?type=${productType}&page=${currPage}&limit=24`, { mode: 'cors' });
+    const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}products?type=${productType}&page=${currPage}&limit=24`, { mode: 'cors' });
     const result = await response.json();
     setTotalProducts(result.total)
     setProducts(result.data);
@@ -26,7 +25,7 @@ const App = ()=> {
     const filteredKeywords = keywords.map(keyword => keyword.trim().replace(/ /g, '_'));
 
     // Get all products for current type
-    const response = await fetch(`${apiBaseUrl}products?type=${productType}&page=${currPage}&limit=${totalProducts}`, { mode: 'cors' });
+    const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}products?type=${productType}&page=${currPage}&limit=${totalProducts}`, { mode: 'cors' });
     const result = await response.json();
     
     const searchResult = result.data.filter(item => {
