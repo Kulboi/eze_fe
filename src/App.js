@@ -49,7 +49,7 @@ const App = ()=> {
     })
 
     if(result.length) {
-      const resultSorted = result.sort((a, b)=> {
+        const resultSorted = result.sort((a, b)=> {
         const Aprice = a.price.slice(1);
         const Bprice = b.price.slice(1);
         return parseInt(Aprice) - parseInt(Bprice);
