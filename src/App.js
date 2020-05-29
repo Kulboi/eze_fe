@@ -13,6 +13,12 @@ const App = ()=> {
   const [products, setProducts] = useState([]);
   const [totalProducts, setTotalProducts] = useState(null);
 
+  const getAllProducts = async ()=> {
+    const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}products?type=${productType}&page=${currPage}&limit=${totalProducts}`, { mode: 'cors' });
+    const result = await response.json();
+    return result.data;
+  }
+
   const fetchProducts = async ()=> {
     const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}products?type=${productType}&page=${currPage}&limit=24`, { mode: 'cors' });
     const result = await response.json();
@@ -23,12 +29,8 @@ const App = ()=> {
   const searchProducts = async (keyword)=> {
     const keywords = keyword.split(","); // search keywords
     const filteredKeywords = keywords.map(keyword => keyword.trim().replace(/ /g, '_'));
-
-    // Get all products for current type
-    const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}products?type=${productType}&page=${currPage}&limit=${totalProducts}`, { mode: 'cors' });
-    const result = await response.json();
-    
-    const searchResult = result.data.filter(item => {
+    const allProducts = await getAllProducts();
+    const searchResult = allProducts.filter(item => {
       return filteredKeywords.includes(item.product.replace(/ /g, '_'));
     })
 
@@ -36,15 +38,19 @@ const App = ()=> {
       alert("No result found for your search");
     }
 
-    setProducts(searchResult);
+    setProducts(searchResult.slice(0, 24));
   }
 
-  const sortByPrice = (minPrice, maxPrice)=> {
-    const result = products.filter(item => {
-      console.log(parseInt(item.price))
-      return item.price >= minPrice
+  const sortByPrice = async (minPrice, maxPrice)=> {
+    const allProducts = await getAllProducts();
+    const result = allProducts.filter(item => {
+      const priceStr = item.price.slice(1);
+      return parseInt(priceStr) >= minPrice && parseInt(priceStr) <= maxPrice
     })
-    console.log(result)
+
+    if(result.length) {
+      setProducts(result.slice(0, 24));
+    }
   }
 
   useEffect(()=> {

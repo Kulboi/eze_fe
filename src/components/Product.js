@@ -11,7 +11,7 @@ const Product = (props)=> {
         </div>
 
         <div className="d-flex justify-content-center">
-          <img src={require(`../products/${props.productDetails.product.toLowerCase().replace(/ /g, '_')}.png`)} alt="Product" />
+          <img src={require(`../product_imgs/${props.productDetails.product.toLowerCase().replace(/ /g, '_')}.png`)} alt="Product" />
         </div>
 
         <div>
