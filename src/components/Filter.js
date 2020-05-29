@@ -12,10 +12,6 @@ const Filter = (props)=> {
     props.fetchProducts();
   }
 
-  const toggleMinMax = (e)=> {
-    console.log(e.target.value)
-  }
-
   const getMinMax = ()=> {
     const minPrice = minPriceEl.current.value || 0;
     const maxPrice = maxPriceEl.current.value || 2000;
@@ -42,203 +38,216 @@ const Filter = (props)=> {
     }
   }
 
+  const contentRef = useRef(null);
+  const toggleFilter = ()=> {
+    const contentDiv = contentRef.current;
+    if(window.getComputedStyle(contentDiv).display === "none") {
+      contentDiv.style.display = "block";
+    }else {
+      contentDiv.style.display = "none";
+    }
+  }
+
   return (
-    <div className="filter py-4">
-      <div className="container">
-        <div className="request mb-5">
-          <h5 className="heading">Request Type</h5>
+    <div className="filter">
+      <button className="btn btn-secondary btn-block mobile-toggle mb-4 py-3 rounded-0" onClick={toggleFilter}>FILTERS</button>
 
-          <div className="btn-group" role="group" aria-label="Basic example">
-            <button 
-              type="button" 
-              className={`btn btn-sm ${requestType === 'BuyRequest' ? 'btn-primary' : 'btn-light'}`}
-              onClick={e => toggleRequestType('BuyRequest')}>
-                Buy Request
-            </button>
+      <div className="content py-4" ref={contentRef}>
+        <div className="container">
+          <div className="request mb-5">
+            <h5 className="heading">Request Type</h5>
 
-            <button 
-              type="button" 
-              className={`btn btn-sm ${requestType === 'SellRequest' ? 'btn-primary' : 'btn-light'}`}
-              onClick={e => toggleRequestType('SellRequest')}>
-              Sell Request
-            </button>
+            <div className="btn-group" role="group" aria-label="Basic example">
+              <button 
+                type="button" 
+                className={`btn btn-sm ${requestType === 'BuyRequest' ? 'btn-primary' : 'btn-light'}`}
+                onClick={e => toggleRequestType('BuyRequest')}>
+                  Buy Request
+              </button>
+
+              <button 
+                type="button" 
+                className={`btn btn-sm ${requestType === 'SellRequest' ? 'btn-primary' : 'btn-light'}`}
+                onClick={e => toggleRequestType('SellRequest')}>
+                Sell Request
+              </button>
+            </div>
           </div>
-        </div>
-        <div className="categories mb-5">
-          <h5 className="heading">Categories</h5>
+          <div className="categories mb-5">
+            <h5 className="heading">Categories</h5>
 
-          <ul className="list-unstyled container pt-2">
-            <li className="list-item mb-2">
-              <a href="#!" className="text-white">All</a>
-            </li>
-            <li className="list-item mb-2">
-              <a href="#!">Iphone</a>
-            </li>
-            <li className="list-item mb-2">
-              <a href="#!" className="text-white">Samsung</a>
-            </li>
-            <li className="list-item mb-2">
-              <a href="#!" className="text-white">Macbook</a>
-            </li>
-            <li className="list-item">
-              <a href="#!" className="text-white">Airpods</a>
-            </li>
-          </ul>
-        </div>
+            <ul className="list-unstyled container pt-2">
+              <li className="list-item mb-2">
+                <a href="#!" className="text-white">All</a>
+              </li>
+              <li className="list-item mb-2">
+                <a href="#!">Iphone</a>
+              </li>
+              <li className="list-item mb-2">
+                <a href="#!" className="text-white">Samsung</a>
+              </li>
+              <li className="list-item mb-2">
+                <a href="#!" className="text-white">Macbook</a>
+              </li>
+              <li className="list-item">
+                <a href="#!" className="text-white">Airpods</a>
+              </li>
+            </ul>
+          </div>
 
-        <div className="price mb-5">
-          <h5 className="heading">Price Filter</h5>
+          <div className="price mb-5">
+            <h5 className="heading">Price Filter</h5>
 
-          <form className="container">
-            <div className="form-group">
-              <input 
-                type="range" 
-                className="form-control-range" 
-                id="priceSlider"
-                onChange={e => toggleMinMax(e)} />
-            </div>
+            <form className="container">
+              <div className="form-group">
+                <input 
+                  type="range" 
+                  className="form-control-range" 
+                  id="priceSlider" />
+              </div>
 
-            <div className="form-group col-md-6 px-0">
-              <input 
-                type="number" 
-                className="form-control" 
-                id="minPrice" 
-                ref={minPriceEl}
-                onChange={e => getMinMax(e)} />
-            </div>
+              <div className="form-group col-md-6 px-0">
+                <input 
+                  type="number" 
+                  className="form-control" 
+                  id="minPrice" 
+                  ref={minPriceEl}
+                  onChange={e => getMinMax(e)} />
+              </div>
 
-            <div className="form-group col-md-6 px-0">
-              <input 
-                type="number" 
-                className="form-control" 
-                id="maxPrice" 
-                ref={maxPriceEl}
-                onChange={e => getMinMax(e)} />
-            </div>
-          </form>
-        </div>
+              <div className="form-group col-md-6 px-0">
+                <input 
+                  type="number" 
+                  className="form-control" 
+                  id="maxPrice" 
+                  ref={maxPriceEl}
+                  onChange={e => getMinMax(e)} />
+              </div>
+            </form>
+          </div>
 
-        <div className="storage mb-5">
-          <h5 className="heading">Storage</h5>
+          <div className="storage mb-5">
+            <h5 className="heading">Storage</h5>
 
-          <form className="container">
-            <div className="form-check mb-2">
-              <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-              <label className="form-check-label">
-                16GB
-              </label>
-            </div>
-            <div className="form-check mb-2">
-              <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-              <label className="form-check-label">
-                32GB
-              </label>
-            </div>
-            <div className="form-check mb-2">
-              <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-              <label className="form-check-label">
-                128GB
-              </label>
-            </div>
-            <div className="form-check mb-2">
-              <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-              <label className="form-check-label">
-                256GB
-              </label>
-            </div>
-            <div className="form-check">
-              <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-              <label className="form-check-label">
-                512GB
-              </label>
-            </div>
-          </form>
-        </div>
+            <form className="container">
+              <div className="form-check mb-2">
+                <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+                <label className="form-check-label">
+                  16GB
+                </label>
+              </div>
+              <div className="form-check mb-2">
+                <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+                <label className="form-check-label">
+                  32GB
+                </label>
+              </div>
+              <div className="form-check mb-2">
+                <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+                <label className="form-check-label">
+                  128GB
+                </label>
+              </div>
+              <div className="form-check mb-2">
+                <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+                <label className="form-check-label">
+                  256GB
+                </label>
+              </div>
+              <div className="form-check">
+                <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+                <label className="form-check-label">
+                  512GB
+                </label>
+              </div>
+            </form>
+          </div>
 
-        <div className="grade mb-5">
-          <h5 className="heading">Grade</h5>
+          <div className="grade mb-5">
+            <h5 className="heading">Grade</h5>
 
-          <form className="container">
-            <div className="form-check mb-2">
-              <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-              <label className="form-check-label">
-                NEW
-              </label>
-            </div>
-            <div className="form-check mb-2">
-              <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-              <label className="form-check-label">
-                A1
-              </label>
-            </div>
-            <div className="form-check mb-2">
-              <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-              <label className="form-check-label">
-                A2
-              </label>
-            </div>
-            <div className="form-check mb-2">
-              <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-              <label className="form-check-label">
-                B1
-              </label>
-            </div>
-            <div className="form-check mb-2">
-              <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-              <label className="form-check-label">
-                B2
-              </label>
-            </div>
-            <div className="form-check mb-2">
-              <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-              <label className="form-check-label">
-                C
-              </label>
-            </div>
-            <div className="form-check mb-2">
-              <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-              <label className="form-check-label">
-                C/B
-              </label>
-            </div>
-            <div className="form-check">
-              <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-              <label className="form-check-label">
-                C/D
-              </label>
-            </div>
-          </form>
-        </div>
+            <form className="container">
+              <div className="form-check mb-2">
+                <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+                <label className="form-check-label">
+                  NEW
+                </label>
+              </div>
+              <div className="form-check mb-2">
+                <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+                <label className="form-check-label">
+                  A1
+                </label>
+              </div>
+              <div className="form-check mb-2">
+                <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+                <label className="form-check-label">
+                  A2
+                </label>
+              </div>
+              <div className="form-check mb-2">
+                <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+                <label className="form-check-label">
+                  B1
+                </label>
+              </div>
+              <div className="form-check mb-2">
+                <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+                <label className="form-check-label">
+                  B2
+                </label>
+              </div>
+              <div className="form-check mb-2">
+                <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+                <label className="form-check-label">
+                  C
+                </label>
+              </div>
+              <div className="form-check mb-2">
+                <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+                <label className="form-check-label">
+                  C/B
+                </label>
+              </div>
+              <div className="form-check">
+                <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+                <label className="form-check-label">
+                  C/D
+                </label>
+              </div>
+            </form>
+          </div>
 
-        <div className="sort mb-5">
-          <h5 className="heading">Sort</h5>
+          <div className="sort mb-5">
+            <h5 className="heading">Sort</h5>
 
-          <form className="container">
-            <div className="form-check">
-              <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" />
-              <label className="form-check-label">
-                Lowest Price
-              </label>
-            </div>
-            <div className="form-check">
-              <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" />
-              <label className="form-check-label">
-                Highest Price
-              </label>
-            </div>
-          </form>
-        </div>
+            <form className="container">
+              <div className="form-check">
+                <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" />
+                <label className="form-check-label">
+                  Lowest Price
+                </label>
+              </div>
+              <div className="form-check">
+                <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" />
+                <label className="form-check-label">
+                  Highest Price
+                </label>
+              </div>
+            </form>
+          </div>
 
-        <div className="d-flex justify-content-between">
-          <button type="button" className="btn btn-sm btn-primary">RESET</button>
+          <div className="d-flex justify-content-between">
+            <button type="button" className="btn btn-sm btn-primary">RESET</button>
 
-          <input 
-            type="file" 
-            style={ {display: 'none'} }
-            ref={uploadRef}
-            accept=".xlsx, .csv"
-            onChange={e => uploadProductsData(e)} />
-          <button type="button" className="btn btn-sm btn-primary" onClick={e => clickUpload()}>LOAD IPHONES</button>
+            <input 
+              type="file" 
+              style={ {display: 'none'} }
+              ref={uploadRef}
+              accept=".xlsx, .csv"
+              onChange={e => uploadProductsData(e)} />
+            <button type="button" className="btn btn-sm btn-primary" onClick={e => clickUpload()}>LOAD IPHONES</button>
+          </div>
         </div>
       </div>
     </div>

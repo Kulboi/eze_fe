@@ -49,7 +49,13 @@ const App = ()=> {
     })
 
     if(result.length) {
-      setProducts(result.slice(0, 24));
+      const resultSorted = result.sort((a, b)=> {
+        const Aprice = a.price.slice(1);
+        const Bprice = b.price.slice(1);
+        return parseInt(Aprice) - parseInt(Bprice);
+      })
+
+      setProducts(resultSorted.slice(0, 24));
     }
   }
 
@@ -65,7 +71,7 @@ const App = ()=> {
         <Hero searchProducts={searchProducts} />
       </section>
 
-      <section className="container-fluid content pl-0 py-5">
+      <section className="container-fluid content py-5">
         <div className="row">
           <aside className="col-md-2">
             <Filter 
